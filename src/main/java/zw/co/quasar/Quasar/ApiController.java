@@ -5,6 +5,9 @@
  */
 package zw.co.quasar.Quasar;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,7 +68,9 @@ public class ApiController {
     }
 
     @RequestMapping("/account")
-    public String showAccount(){
+    public String showAccount(HttpServletRequest request, HttpServletResponse response){
+        Cookie cookie = new Cookie("saturday", "inbed");
+        response.addCookie(cookie);
         return "";
     }
 
@@ -76,6 +81,10 @@ public class ApiController {
 
     @RequestMapping("/account/log-out")
     String logOut(){
+        return "";
+    }
+    
+    String test(HttpServletRequest request){
         return "";
     }
 }
