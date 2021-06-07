@@ -21,7 +21,7 @@ public class AccountDAImpl implements AccountDA {
     
     @Override
     public String getUserPasswordHash(String email){
-        String hash;
+        String hash = null;
         try{
             hash = jdbcTemplate.queryForObject(
                         "SELECT password_hash FROM qzw_user WHERE email = ?",
@@ -29,9 +29,8 @@ public class AccountDAImpl implements AccountDA {
                         email
             );
         }
-        catch(IncorrectResultSizeDataAccessException e){
-            hash = null;
+        finally{
+            return hash;
         }
-        return hash;
     }
 }

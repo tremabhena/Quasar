@@ -13,9 +13,9 @@ import java.util.List;
  * @author Mabhena
  */
 public interface CategoryDA {
-    Category getCategory();
-    List<Category> getCategories();
-    Boolean addCategory();
+    Category getCategory(Long categoryId);
+    List<Category> getCategories(Integer page, Integer limit, String sortBy, String direction);
+    /*Boolean addCategory();
     Boolean removeCategory();
-    Boolean updateCategory();
+    Boolean updateCategory();*/
 }

@@ -52,12 +52,7 @@ public class QuasarAuthenticationProvider implements AuthenticationProvider{
                 "Authentication failed for " + username);
         }
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-        /*account.getRoles().forEach(role ->
-        grantedAuthorities.add(new SimpleGrantedAuthority(role.
-        getRole())));*/
-        //authentication.setAuthenticated(true);
-        //return authentication;
+        grantedAuthorities.add(new SimpleGrantedAuthority("CUSTOMER"));
         return new UsernamePasswordAuthenticationToken(username, password, grantedAuthorities);
     }
     

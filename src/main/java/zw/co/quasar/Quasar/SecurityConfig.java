@@ -29,11 +29,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .httpBasic()
-                .and()
-                .authorizeRequests()
-                .mvcMatchers("/api/v1/cart/checkout")
-                .authenticated();
+            .httpBasic()
+            .and()
+            .authorizeRequests()
+            .mvcMatchers("/api/v1/cart/checkout")
+            .authenticated();
     }
     
     

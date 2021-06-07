@@ -13,11 +13,11 @@ import java.util.List;
  * @author Mabhena
  */
 public interface CurrencyDA {
-    Currency getCurrency();
-    List<Currency> getCurrencies();
+    Currency getCurrency(Long currencyId);
+    /*List<Currency> getCurrencies();
     Boolean addCurrency();
     Boolean removeCurrency();
     Boolean activateCurrency();
     Boolean deactivateCurrency();
-    Boolean updateCurrency();
+    Boolean updateCurrency();*/
 }

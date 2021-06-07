@@ -13,9 +13,9 @@ import java.util.List;
  * @author Mabhena
  */
 public interface ImageDA {
-    Image getImage();
-    List<Image> getImages();
-    Boolean addImage();
+    //Image getImage();
+    List<Image> getProductImages(Long productId);
+    /*Boolean addImage();
     Boolean removeImage();
-    Boolean updateImage();
+    Boolean updateImage();*/
 }

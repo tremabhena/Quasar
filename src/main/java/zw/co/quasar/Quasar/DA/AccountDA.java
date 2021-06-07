@@ -5,9 +5,6 @@
  */
 package zw.co.quasar.Quasar.DA;
 
-import zw.co.quasar.Quasar.POJOS.User;
-import java.util.List;
-
 /**
  *
  * @author Mabhena

@@ -5,6 +5,7 @@
  */
 package zw.co.quasar.Quasar.POJOS;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,4 +19,5 @@ public class Product {
     Float price;
     String name, category, description;
     Currency currency;
+    List<Image> images;
 }

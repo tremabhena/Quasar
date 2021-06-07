@@ -5,20 +5,20 @@
  */
 package zw.co.quasar.Quasar.DA;
 
-import zw.co.quasar.Quasar.POJOS.Product;
 import java.util.List;
+import zw.co.quasar.Quasar.POJOS.Product;
 
 /**
  *
  * @author Mabhena
  */
 public interface ProductDA {
-    Product getProduct();
-    List<Product> getProducts();
-    List<Product> searchProduct();
+    Product getProduct(Long id);
+    List<Product> getProducts(Integer page, Integer limit, String sortBy, String direction);
+    /*List<Product> searchProduct();
     Boolean addProduct();
     Boolean removeProduct();
     Boolean updateProduct();
     Boolean activateProduct();
-    Boolean deactivateProduct();
+    Boolean deactivateProduct();*/
 }
