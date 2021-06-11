@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.POJOS;
+package zw.co.quasar.Quasar;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +15,6 @@ import lombok.Setter;
  * @author Mabhena
  */
 @Getter @Setter
-public class Order {
-    int id;
-    String phone, dateAdded, country, email, cityTownProvince, address;
-    User user;
+public class Cart implements Serializable {
+    private HashMap<Integer, CartItem> items;
 }

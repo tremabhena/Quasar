@@ -8,22 +8,24 @@ package zw.co.quasar.Quasar.DA;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import zw.co.quasar.Quasar.POJOS.Image;
 
 /**
  *
  * @author Mabhena
  */
+@Component
 public class ImageDAImpl implements ImageDA{
     @Autowired
     JdbcTemplate jdbcTemplate;
     
     @Override
-    public List<Image> getProductImages(Long productId){
+    public List<Image> getProductImages(long productId){
         List<Image> images = jdbcTemplate.query("SELECT id, url, width, height FROM qzw_product_image WHERE product = ?",
         (resultSet, rowNum) ->{
             Image image = new Image();
-            image.setId(resultSet.getLong("id"));
+            image.setId(resultSet.getInt("id"));
             image.setHeight(resultSet.getShort("height"));
             image.setWidth(resultSet.getShort("width"));
             image.setUrl(resultSet.getString("url"));

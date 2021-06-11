@@ -14,8 +14,8 @@ import lombok.Setter;
  */
 @Getter @Setter
 public class Currency {
-    Long id;
+    int id;
     String isoCode, symbol, name;
-    Float rate;
-    Boolean active;
+    float rate;
+    boolean active;
 }

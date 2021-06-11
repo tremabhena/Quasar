@@ -15,7 +15,7 @@ import java.util.List;
 public interface OrderDA {
     Order getOrder();
     List<Order> getOrders();
-    Boolean addOrder();
-    Boolean removeOrder();
-    Boolean updateOrtder();
+    boolean addOrder();
+    boolean removeOrder();
+    boolean updateOrtder();
 }

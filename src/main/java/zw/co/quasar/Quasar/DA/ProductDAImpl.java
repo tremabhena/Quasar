@@ -29,7 +29,7 @@ public class ProductDAImpl implements ProductDA {
     
     private final RowMapper<Product> rowMapper = (resultSet, rowNum) ->{
                     Product product = new Product();
-                    long id = resultSet.getLong("id");
+                    int id = resultSet.getInt("id");
                     product.setId(id);
                     product.setPrice(resultSet.getBigDecimal("price"));
                     product.setName(resultSet.getString("name"));
@@ -44,7 +44,7 @@ public class ProductDAImpl implements ProductDA {
                 };
     
     @Override
-    public Product getProduct(long id){
+    public Product getProduct(int id){
         String query = "SELECT id, price, name, category, description, currency FROM qzw_product WHERE id = ?";
         Product newProduct = jdbcTemplate.queryForObject(query,
                 rowMapper, id);

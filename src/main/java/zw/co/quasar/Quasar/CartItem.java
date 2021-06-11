@@ -3,18 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.POJOS;
+package zw.co.quasar.Quasar;
 
+import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
+import zw.co.quasar.Quasar.POJOS.Currency;
 
 /**
  *
  * @author Mabhena
  */
 @Getter @Setter
-public class Order {
+public class CartItem {
     int id;
-    String phone, dateAdded, country, email, cityTownProvince, address;
-    User user;
+    int quantity;
+    BigDecimal unitPrice;
+    String name;
+    Currency currency;
 }

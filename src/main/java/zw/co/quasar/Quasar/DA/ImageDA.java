@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ImageDA {
     //Image getImage();
-    List<Image> getProductImages(Long productId);
+    List<Image> getProductImages(long productId);
     /*Boolean addImage();
     Boolean removeImage();
     Boolean updateImage();*/

@@ -5,6 +5,7 @@
  */
 package zw.co.quasar.Quasar.POJOS;
 
+import java.math.BigDecimal;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,8 +16,8 @@ import lombok.Setter;
  */
 @Getter @Setter
 public class Product {
-    Long id;
-    Float price;
+    int id;
+    BigDecimal price;
     String name, category, description;
     Currency currency;
     List<Image> images;

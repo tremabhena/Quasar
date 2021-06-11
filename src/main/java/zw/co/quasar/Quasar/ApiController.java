@@ -5,12 +5,17 @@
  */
 package zw.co.quasar.Quasar;
 
+import java.security.Principal;
 import java.util.List;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,49 +38,63 @@ public class ApiController {
     @Autowired
     CategoryDA categoryDA;
     
+    @Autowired
+    CartService cartService;
+    
+    Cart cart;
+    
     @RequestMapping("/products")
-    List<Product> listProducts(@RequestParam("limit") Integer limit, @RequestParam("page") Integer page,
+    List<Product> listProducts(@RequestParam("limit") int limit, @RequestParam("page") int page,
                         @RequestParam("sort_by") String sortBy, @RequestParam("dir") String direction){
         List<Product> products = productDA.getProducts(page, limit, sortBy, direction);
         return products;
     }
 
     @RequestMapping("/products/{productId}")
-    Product viewProduct(@PathVariable Long productId){
+    Product viewProduct(@PathVariable int productId){
         return productDA.getProduct(productId);
     }
 
     @RequestMapping("/category")
-    List<Category> listCategories(@RequestParam("limit") Integer limit, @RequestParam("page") Integer page,
+    List<Category> listCategories(@RequestParam("limit") int limit, @RequestParam("page") int page,
                           @RequestParam("sort_by") String sortBy, @RequestParam("direction") String direction){
         List<Category> categories = categoryDA.getCategories(page, limit, sortBy, direction);
         return categories;
     }
 
     @RequestMapping("/category/{categoryId}")
-    Category viewCategory(@PathVariable Long categoryId){
+    Category viewCategory(@PathVariable long categoryId){
         return categoryDA.getCategory(categoryId);
     }
 
     @RequestMapping("/cart")
-    String showCart(){
-        Session session;
-        return "";
+    Cart showCart(HttpSession session){
+        cart = (Cart) session.getAttribute("cart");
+        session.setAttribute("cart", cart);
+        return cart;
     }
 
     @RequestMapping("/cart/remove/{itemId}")
-    String removeFromCart(@PathVariable Long itemId){
-        return "";
+    Cart removeFromCart(@PathVariable int itemId, HttpSession session){
+        cart = (Cart) session.getAttribute("cart");
+        cart = cartService.remove(itemId, cart);
+        session.setAttribute("cart", cart);
+        return cart;
     }
 
     @RequestMapping("/cart/add/{itemId}")
-    String addToCart(@PathVariable Long itemId){
-        return "";
+    Cart addToCart(@PathVariable int itemId, HttpSession session){
+        cart = (Cart) session.getAttribute("cart");
+        cart = cartService.add(itemId, cart);
+        session.setAttribute("cart", cart);
+        return cart;
     }
 
     @RequestMapping("/cart/empty")
-    String emptyCart(){
-        return "";
+    void emptyCart(HttpSession session){
+        cart = (Cart) session.getAttribute("cart");
+        session.setAttribute("cart", cart);
+        cartService.empty(cart);
     }
 
     @RequestMapping("/cart/checkout")
@@ -84,19 +103,21 @@ public class ApiController {
     }
 
     @RequestMapping("/account")
-    public String showAccount(HttpServletRequest request, HttpServletResponse response){
-        Cookie cookie = new Cookie("saturday", "inbed");
-        response.addCookie(cookie);
-        return "";
+    public String showAccount(Principal principal){
+        if(principal != null) return principal.getName();
+        else return "Guest";
     }
 
-    @RequestMapping("/account/sign-in")
+    @RequestMapping("/account/signin")
     String signIn(){
         return "";
     }
 
-    @RequestMapping("/account/log-out")
-    String logOut(){
-        return "";
+    @RequestMapping("/account/logout")
+    void logOut(HttpServletRequest request, HttpServletResponse response){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth!=null){
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
     }
 }

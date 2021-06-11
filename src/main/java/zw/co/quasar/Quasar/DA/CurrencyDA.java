@@ -6,14 +6,12 @@
 package zw.co.quasar.Quasar.DA;
 
 import zw.co.quasar.Quasar.POJOS.Currency;
-import java.util.List;
-
 /**
  *
  * @author Mabhena
  */
 public interface CurrencyDA {
-    Currency getCurrency(Long currencyId);
+    Currency getCurrency(long currencyId);
     /*List<Currency> getCurrencies();
     Boolean addCurrency();
     Boolean removeCurrency();

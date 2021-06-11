@@ -14,7 +14,7 @@ import lombok.Setter;
  */
 @Getter @Setter
 public class Image {
-    Long id;
-    short width, height;
+    int id;
+    Short width, height;
     String url;
 }

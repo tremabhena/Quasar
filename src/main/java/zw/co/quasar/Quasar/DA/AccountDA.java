@@ -5,10 +5,13 @@
  */
 package zw.co.quasar.Quasar.DA;
 
+import zw.co.quasar.Quasar.POJOS.User;
+
 /**
  *
  * @author Mabhena
  */
 public interface AccountDA {
     public String getUserPasswordHash(String email);
+    public User getUserByEmail(String email);
 }

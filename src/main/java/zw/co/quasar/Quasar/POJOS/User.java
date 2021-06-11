@@ -14,6 +14,6 @@ import lombok.Setter;
  */
 @Getter @Setter
 public class User {
-    Long id;
-    String firstNames, lastName, passwordHash, email, phone, gender, birthDay, Country;
+    int id;
+    String firstNames, lastName, /*passwordHash,*/ email, phone, gender, birthDay, country;
 }

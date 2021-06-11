@@ -13,8 +13,8 @@ import zw.co.quasar.Quasar.POJOS.Product;
  * @author Mabhena
  */
 public interface ProductDA {
-    Product getProduct(Long id);
-    List<Product> getProducts(Integer page, Integer limit, String sortBy, String direction);
+    Product getProduct(int id);
+    List<Product> getProducts(int page, int limit, String sortBy, String direction);
     /*List<Product> searchProduct();
     Boolean addProduct();
     Boolean removeProduct();
