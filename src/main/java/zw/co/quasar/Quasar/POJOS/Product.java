@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Getter @Setter
 public class Product {
-    int id;
+    int id, quantity;
     BigDecimal price;
     String name, category, description;
     Currency currency;

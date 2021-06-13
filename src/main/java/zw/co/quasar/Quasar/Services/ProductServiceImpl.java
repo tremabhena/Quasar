@@ -31,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
                     Product product = new Product();
                     int id = resultSet.getInt("id");
                     product.setId(id);
+                    product.setQuantity(resultSet.getInt("quantity"));
                     product.setPrice(resultSet.getBigDecimal("price"));
                     product.setName(resultSet.getString("name"));
                     product.setCategory(resultSet.getString("category"));
