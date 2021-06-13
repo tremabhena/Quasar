@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.DA;
+package zw.co.quasar.Quasar.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +15,7 @@ import zw.co.quasar.Quasar.POJOS.Currency;
  * @author Mabhena
  */
 @Component
-public class CurrencyDAImpl implements CurrencyDA {
+public class CurrencyServiceImpl implements CurrencyService {
     @Autowired
     JdbcTemplate jdbcTemplate;
     

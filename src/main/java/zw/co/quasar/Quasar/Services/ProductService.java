@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.DA;
+package zw.co.quasar.Quasar.Services;
 
 import java.util.List;
 import zw.co.quasar.Quasar.POJOS.Product;
@@ -12,7 +12,7 @@ import zw.co.quasar.Quasar.POJOS.Product;
  *
  * @author Mabhena
  */
-public interface ProductDA {
+public interface ProductService {
     Product getProduct(int id);
     List<Product> getProducts(int page, int limit, String sortBy, String direction);
     /*List<Product> searchProduct();

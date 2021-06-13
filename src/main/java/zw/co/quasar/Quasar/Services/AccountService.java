@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.DA;
+package zw.co.quasar.Quasar.Services;
 
 import zw.co.quasar.Quasar.POJOS.User;
 
@@ -11,7 +11,7 @@ import zw.co.quasar.Quasar.POJOS.User;
  *
  * @author Mabhena
  */
-public interface AccountDA {
+public interface AccountService {
     public String getUserPasswordHash(String email);
     public User getUserByEmail(String email);
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.DA;
+package zw.co.quasar.Quasar.Services;
 
 import zw.co.quasar.Quasar.POJOS.Order;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Mabhena
  */
-public interface OrderDA {
+public interface OrderService {
     Order getOrder();
     List<Order> getOrders();
     boolean addOrder();

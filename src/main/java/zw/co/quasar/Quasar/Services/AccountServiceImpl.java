@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.DA;
+package zw.co.quasar.Quasar.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,7 +16,7 @@ import zw.co.quasar.Quasar.POJOS.User;
  * @author Mabhena
  */
 @Component
-public class AccountDAImpl implements AccountDA {
+public class AccountServiceImpl implements AccountService {
     @Autowired
     JdbcTemplate jdbcTemplate;
     
@@ -47,8 +47,9 @@ public class AccountDAImpl implements AccountDA {
         return hash;
     }
     
+    @Override
     public User getUserByEmail(String email){
-        User user = jdbcTemplate.queryForObject("SELECT id, first_names, last_name, email, phone, gender, birthday, country FROM qzw_user WHERE email = ?", rowMapper, email);
+        User user = jdbcTemplate.queryForObject("SELECT id, first_names, last_name, email, phone, gender, birth_day, country FROM qzw_user WHERE email = ?", rowMapper, email);
         return user;
     }
 }

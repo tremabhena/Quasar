@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.DA;
+package zw.co.quasar.Quasar.Services;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +17,15 @@ import zw.co.quasar.Quasar.POJOS.Product;
  * @author Mabhena
  */
 @Component
-public class ProductDAImpl implements ProductDA {
+public class ProductServiceImpl implements ProductService {
     @Autowired
     JdbcTemplate jdbcTemplate;
     
     @Autowired
-    ImageDA imageDA;
+    ImageService imageDA;
     
     @Autowired
-    CurrencyDA currencyDA;
+    CurrencyService currencyDA;
     
     private final RowMapper<Product> rowMapper = (resultSet, rowNum) ->{
                     Product product = new Product();

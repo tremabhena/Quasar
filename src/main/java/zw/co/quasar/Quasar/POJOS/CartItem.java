@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar;
+package zw.co.quasar.Quasar.POJOS;
 
 import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
-import zw.co.quasar.Quasar.POJOS.Currency;
-
 /**
  *
  * @author Mabhena

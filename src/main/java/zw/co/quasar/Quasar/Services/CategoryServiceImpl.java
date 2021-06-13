@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.DA;
+package zw.co.quasar.Quasar.Services;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import zw.co.quasar.Quasar.POJOS.Category;
  * @author Mabhena
  */
 @Component
-public class CategoryDAImpl implements CategoryDA {
+public class CategoryServiceImpl implements CategoryService {
     @Autowired
     JdbcTemplate jdbcTemplate;
     

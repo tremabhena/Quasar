@@ -5,25 +5,27 @@
  */
 package zw.co.quasar.Quasar;
 
+import zw.co.quasar.Quasar.POJOS.Cart;
+import zw.co.quasar.Quasar.Services.CartService;
 import java.security.Principal;
 import java.util.List;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import zw.co.quasar.Quasar.DA.CategoryDA;
-import zw.co.quasar.Quasar.DA.ProductDA;
 import zw.co.quasar.Quasar.POJOS.Category;
 import zw.co.quasar.Quasar.POJOS.Product;
+import zw.co.quasar.Quasar.POJOS.User;
+import zw.co.quasar.Quasar.Services.AccountService;
+import zw.co.quasar.Quasar.Services.CategoryService;
+import zw.co.quasar.Quasar.Services.ProductService;
 
 /**
  *
@@ -33,10 +35,13 @@ import zw.co.quasar.Quasar.POJOS.Product;
 @RequestMapping(path = "/api/v1", consumes="application/json")
 public class ApiController {
     @Autowired
-    ProductDA productDA;
+    ProductService productService;
     
     @Autowired
-    CategoryDA categoryDA;
+    CategoryService categoryService;
+    
+    @Autowired
+    AccountService accountService;
     
     @Autowired
     CartService cartService;
@@ -46,25 +51,25 @@ public class ApiController {
     @RequestMapping("/products")
     List<Product> listProducts(@RequestParam("limit") int limit, @RequestParam("page") int page,
                         @RequestParam("sort_by") String sortBy, @RequestParam("dir") String direction){
-        List<Product> products = productDA.getProducts(page, limit, sortBy, direction);
+        List<Product> products = productService.getProducts(page, limit, sortBy, direction);
         return products;
     }
 
     @RequestMapping("/products/{productId}")
     Product viewProduct(@PathVariable int productId){
-        return productDA.getProduct(productId);
+        return productService.getProduct(productId);
     }
 
     @RequestMapping("/category")
     List<Category> listCategories(@RequestParam("limit") int limit, @RequestParam("page") int page,
                           @RequestParam("sort_by") String sortBy, @RequestParam("direction") String direction){
-        List<Category> categories = categoryDA.getCategories(page, limit, sortBy, direction);
+        List<Category> categories = categoryService.getCategories(page, limit, sortBy, direction);
         return categories;
     }
 
     @RequestMapping("/category/{categoryId}")
     Category viewCategory(@PathVariable long categoryId){
-        return categoryDA.getCategory(categoryId);
+        return categoryService.getCategory(categoryId);
     }
 
     @RequestMapping("/cart")
@@ -103,9 +108,13 @@ public class ApiController {
     }
 
     @RequestMapping("/account")
-    public String showAccount(Principal principal){
-        if(principal != null) return principal.getName();
-        else return "Guest";
+    public User showAccount(Principal principal){
+        if(principal != null) {
+            String email = principal.getName();
+            User user = accountService.getUserByEmail(email);
+            return user;
+        }
+        else return null;
     }
 
     @RequestMapping("/account/signin")

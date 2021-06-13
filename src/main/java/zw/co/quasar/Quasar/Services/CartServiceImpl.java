@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar;
+package zw.co.quasar.Quasar.Services;
 
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import zw.co.quasar.Quasar.DA.ProductDA;
+import zw.co.quasar.Quasar.POJOS.Cart;
+import zw.co.quasar.Quasar.POJOS.CartItem;
 import zw.co.quasar.Quasar.POJOS.Product;
+import zw.co.quasar.Quasar.Services.ProductService;
 
 /**
  *
@@ -18,7 +20,7 @@ import zw.co.quasar.Quasar.POJOS.Product;
 @Service
 public class CartServiceImpl implements CartService{
     @Autowired
-    ProductDA productDA;
+    ProductService productDA;
     
     HashMap<Integer, CartItem> items;
     

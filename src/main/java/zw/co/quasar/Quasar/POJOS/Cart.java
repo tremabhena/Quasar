@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar;
+package zw.co.quasar.Quasar.POJOS;
 
 import java.io.Serializable;
 import java.util.HashMap;

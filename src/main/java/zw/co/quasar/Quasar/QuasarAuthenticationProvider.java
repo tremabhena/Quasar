@@ -19,7 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import zw.co.quasar.Quasar.DA.AccountDA;
+import zw.co.quasar.Quasar.Services.AccountService;
 
 /**
  *
@@ -28,7 +28,7 @@ import zw.co.quasar.Quasar.DA.AccountDA;
 @Component
 public class QuasarAuthenticationProvider implements AuthenticationProvider{
     @Autowired
-    AccountDA accountDA;
+    AccountService accountService;
     
     //todo restore bcrypt
     //private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -40,7 +40,7 @@ public class QuasarAuthenticationProvider implements AuthenticationProvider{
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
         
-        String passwordHash = accountDA.getUserPasswordHash(username);
+        String passwordHash = accountService.getUserPasswordHash(username);
         if(passwordHash == null){
             System.out.println("Password hash is null");
             throw new BadCredentialsException(

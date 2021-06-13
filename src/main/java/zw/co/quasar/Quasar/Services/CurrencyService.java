@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zw.co.quasar.Quasar.DA;
+package zw.co.quasar.Quasar.Services;
 
 import zw.co.quasar.Quasar.POJOS.Currency;
 /**
  *
  * @author Mabhena
  */
-public interface CurrencyDA {
+public interface CurrencyService {
     Currency getCurrency(long currencyId);
     /*List<Currency> getCurrencies();
     Boolean addCurrency();
