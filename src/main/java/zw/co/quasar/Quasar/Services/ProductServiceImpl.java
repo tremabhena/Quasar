@@ -37,6 +37,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setCategory(resultSet.getString("category"));
                     product.setDescription(resultSet.getString("description"));
                     product.setImages(imageDA.getProductImages(id));
+                    product.setActive(true);
                     
                     long currencyId = resultSet.getLong("currency");
                     if(currencyId == 0) product.setCurrency(currencyDA.getCurrency(currencyId));
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
     
     @Override
     public Product getProduct(int id){
-        String query = "SELECT id, price, name, category, description, currency FROM qzw_product WHERE id = ?";
+        String query = "SELECT id, price, quantity, name, category, description, currency FROM qzw_product WHEREid = ? AND active = TRUE";
         Product newProduct = jdbcTemplate.queryForObject(query,
                 rowMapper, id);
         return newProduct;
@@ -57,9 +58,21 @@ public class ProductServiceImpl implements ProductService {
         if(!(direction.equalsIgnoreCase("asc") || direction.equalsIgnoreCase("desc"))) direction = "";
         if(!(sortBy.equalsIgnoreCase("price")||sortBy.equalsIgnoreCase("name")||sortBy.equalsIgnoreCase("category"))) sortBy = "id";
         
-        List<Product> products = jdbcTemplate.query("SELECT id, price, currency, name, category, description FROM qzw_product ORDER BY ? ? LIMIT ?,?",
+        List<Product> products = jdbcTemplate.query("SELECT id, price, quantity, currency, name, category, description FROM qzw_product WHERE active = TRUE ORDER BY ? ? LIMIT ?,?",
                 rowMapper
                 ,sortBy, direction, page, limit);
+        
+        return products;
+    }
+    
+    @Override
+    public List<Product> getCategoryProducts(int categoryId, int page, int limit, String sortBy, String direction){
+        if(!(direction.equalsIgnoreCase("asc") || direction.equalsIgnoreCase("desc"))) direction = "";
+        if(!(sortBy.equalsIgnoreCase("price")||sortBy.equalsIgnoreCase("name")||sortBy.equalsIgnoreCase("category"))) sortBy = "id";
+        
+        List<Product> products = jdbcTemplate.query("SELECT id, price, quantity, currency, name, category, description FROM qzw_product WHERE category = ? AND active = TRUEORDER BY ? ? LIMIT ?,?",
+                rowMapper
+                ,categoryId, sortBy, direction, page, limit);
         
         return products;
     }

@@ -29,7 +29,7 @@ public class CurrencyServiceImpl implements CurrencyService {
                     newCurrency.setIsoCode(resultSet.getString("iso_code"));
                     newCurrency.setActive(true);
                     newCurrency.setRate(resultSet.getFloat("rate"));
-                    newCurrency.setSymbol(resultSet.getString("symbol"));
+                    newCurrency.setSymbol(resultSet.getLong("symbol"));
                     newCurrency.setName(resultSet.getString("name"));
                     
                     return newCurrency;

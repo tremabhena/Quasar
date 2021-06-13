@@ -13,6 +13,7 @@ import zw.co.quasar.Quasar.POJOS.Cart;
  */
 public interface CartService {
     public Cart remove(int productId, Cart cart);
+    public Cart subtract(int productId, Cart cart);
     public Cart add(int productId, Cart cart);
     public Cart update(int productId, int quantity, Cart cart);
     public boolean empty(Cart cart);

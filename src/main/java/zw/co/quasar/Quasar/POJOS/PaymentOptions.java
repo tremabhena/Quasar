@@ -5,6 +5,7 @@
  */
 package zw.co.quasar.Quasar.POJOS;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,8 +13,7 @@ import lombok.Setter;
  *
  * @author Mabhena
  */
-@Getter @Setter
-public class Category {
-    private int id;
-    private String name, description;
+@Setter @Getter
+public class PaymentOptions {
+    private List<PaymentMethod> paymentOptions;
 }

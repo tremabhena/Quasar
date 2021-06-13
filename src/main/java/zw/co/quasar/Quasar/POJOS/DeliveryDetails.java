@@ -13,7 +13,6 @@ import lombok.Setter;
  * @author Mabhena
  */
 @Getter @Setter
-public class Category {
-    private int id;
-    private String name, description;
+public class DeliveryDetails {
+    private String phone, country, email, address, recipientFirstName, recipientLastName, cityTownProvince;
 }

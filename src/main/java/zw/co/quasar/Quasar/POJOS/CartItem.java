@@ -14,8 +14,8 @@ import lombok.Setter;
  */
 @Getter @Setter
 public class CartItem {
-    int id, quantity;
-    BigDecimal unitPrice;
-    String name;
-    Currency currency;
+    private int id, quantity;
+    private BigDecimal unitPrice;
+    private String name;
+    private Currency currency;
 }

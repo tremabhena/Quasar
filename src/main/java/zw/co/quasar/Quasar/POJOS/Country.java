@@ -13,7 +13,8 @@ import lombok.Setter;
  * @author Mabhena
  */
 @Getter @Setter
-public class Category {
-    private int id;
-    private String name, description;
+public class Country {
+    private String name, code;
+    private int flag; //decimal unicode for country's flag
+    private boolean active;
 }

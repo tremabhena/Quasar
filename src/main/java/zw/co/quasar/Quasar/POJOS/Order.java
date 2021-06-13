@@ -14,7 +14,7 @@ import lombok.Setter;
  */
 @Getter @Setter
 public class Order {
-    int id;
-    String phone, dateAdded, country, email, cityTownProvince, address;
-    User user;
+    private int id;
+    private String phone, dateAdded, country, email, cityTownProvince, address;
+    private User user;
 }

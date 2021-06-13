@@ -31,10 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .httpBasic()
             .and()
+            .csrf().disable()
             .authorizeRequests()
             .mvcMatchers("/api/v1/cart/checkout")
             .authenticated();
     }
-    
-    
 }

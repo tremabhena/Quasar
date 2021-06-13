@@ -12,8 +12,7 @@ import lombok.Setter;
  *
  * @author Mabhena
  */
-@Getter @Setter
-public class Category {
-    private int id;
-    private String name, description;
+@Setter @Getter
+public class PaymentMethod {
+    private String id, name, description, logoUrl;
 }

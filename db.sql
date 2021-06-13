@@ -12,7 +12,7 @@ CREATE TABLE qzw_category(id INT AUTO_INCREMENT PRIMARY KEY,
 						description TEXT) ENGINE=InnoDB;
 						
 CREATE TABLE qzw_currency(id INT AUTO_INCREMENT PRIMARY KEY,
-						iso_code VARCHAR(3) NOT NULL,
+						iso_code CHAR(3) NOT NULL,
 						symbol CHAR,
 						name VARCHAR(30) NOT NULL,
 						rate FLOAT NOT NULL DEFAULT 1,
@@ -38,7 +38,7 @@ CREATE TABLE qzw_order_item(id INT AUTO_INCREMENT PRIMARY KEY,
 							product INT NOT NULL,
 							quantity INT NOT NULL DEFAULT 1,
 							price DECIMAL(9,2) NOT NULL, 
-							order` INT NOT NULL,
+							`order` INT NOT NULL,
 							currency INT NOT NULL) ENGINE=InnoDB;
 							
 CREATE TABLE qzw_payment(id INT AUTO_INCREMENT PRIMARY KEY,

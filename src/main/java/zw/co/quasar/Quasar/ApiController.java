@@ -19,14 +19,18 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import zw.co.quasar.Quasar.POJOS.Category;
+import zw.co.quasar.Quasar.POJOS.DeliveryDetails;
+import zw.co.quasar.Quasar.POJOS.PaymentMethod;
 import zw.co.quasar.Quasar.POJOS.Product;
 import zw.co.quasar.Quasar.POJOS.User;
 import zw.co.quasar.Quasar.Services.AccountService;
 import zw.co.quasar.Quasar.Services.CategoryService;
+import zw.co.quasar.Quasar.Services.PaymentService;
 import zw.co.quasar.Quasar.Services.ProductService;
 
 /**
@@ -48,90 +52,103 @@ public class ApiController {
     @Autowired
     CartService cartService;
     
-    Cart cart;
+    @Autowired
+    PaymentService paymentService;
     
+    //get product list
     @RequestMapping("/products")
     List<Product> listProducts(@RequestParam("limit") int limit, @RequestParam("page") int page,
                         @RequestParam("sort_by") String sortBy, @RequestParam("dir") String direction){
         List<Product> products = productService.getProducts(page, limit, sortBy, direction);
         return products;
     }
-
+    
+    //retrieve specific product
     @RequestMapping("/products/{productId}")
     Product viewProduct(@PathVariable int productId){
         return productService.getProduct(productId);
     }
-
+    
+    //get list of product categories
     @RequestMapping("/category")
     List<Category> listCategories(@RequestParam("limit") int limit, @RequestParam("page") int page,
                           @RequestParam("sort_by") String sortBy, @RequestParam("direction") String direction){
         List<Category> categories = categoryService.getCategories(page, limit, sortBy, direction);
         return categories;
     }
-
+    
+    //get specific category
     @RequestMapping("/category/{categoryId}")
     Category viewCategory(@PathVariable long categoryId){
         return categoryService.getCategory(categoryId);
     }
-
+    
+    //get products under specific category
+    @RequestMapping("/category/{categoryId}/products")
+    List<Product> listCategoryProducts(@PathVariable int categoryId, @RequestParam("limit") int limit, @RequestParam("page") int page,
+                        @RequestParam("sort_by") String sortBy, @RequestParam("dir") String direction){
+        List<Product> products = productService.getCategoryProducts(categoryId, page, limit, sortBy, direction);
+        return products;
+    }
+    
+    //show cart
     @RequestMapping("/cart")
     Cart showCart(HttpSession session){
-        cart = (Cart) session.getAttribute("cart");
+        Cart cart = (Cart) session.getAttribute("cart");
         session.setAttribute("cart", cart);
         return cart;
     }
-
+    
+    //completely remove product from cart
     @PostMapping("/cart/remove/{itemId}")
     Cart removeFromCart(@PathVariable int itemId, HttpSession session){
-        cart = (Cart) session.getAttribute("cart");
+        Cart cart = (Cart) session.getAttribute("cart");
         cart = cartService.remove(itemId, cart);
         session.setAttribute("cart", cart);
         return cart;
     }
-
+    
+    //add (1) item to cart
     @PostMapping("/cart/add/{itemId}")
     Cart addToCart(@PathVariable int itemId, HttpSession session){
-        cart = (Cart) session.getAttribute("cart");
+        Cart cart = (Cart) session.getAttribute("cart");
         cart = cartService.add(itemId, cart);
         session.setAttribute("cart", cart);
         return cart;
     }
-
+    
+    //empty cart
     @PostMapping("/cart/empty")
     void emptyCart(HttpSession session){
-        cart = (Cart) session.getAttribute("cart");
+        Cart cart = (Cart) session.getAttribute("cart");
         session.setAttribute("cart", cart);
         cartService.empty(cart);
     }
-
+    /*
     @GetMapping("/cart/checkout/address")
-    String getAddressOptions(){
-        return "";
+    void getAddressOptions(){
     }
     
     @PostMapping("/cart/checkout/address")
-    String addAddressDetails(){
-        return "";
+    void addDeliveryAddress(){
     }
     
     @GetMapping("/cart/checkout/delivery")
-    String getDeliveryOptions(){
-        return "";
+    void getDeliveryOptions(){
     }
-    
-    @PostMapping("/cart/checkout/delivery")
-    String addDeliveryDetails(){
-        return "";
+    */
+    @PostMapping("/cart/checkout/delivery-details")
+    void addDeliveryDetails(@RequestBody DeliveryDetails deliveryDetails, HttpSession session){
     }
     
     @GetMapping("/cart/checkout/payment")
-    String viewPaymentOptions(){
-        return "";
+    List<PaymentMethod> viewPaymentOptions(){
+        return paymentService.getPaymentMethods();
     }
     
     @PostMapping("/cart/checkout/payment")
-    String choosePaymentOptions(){
-        return "";
+    String choosePaymentOptions(@RequestParam("payment_method") String paymentMethod, HttpSession session){
+        return paymentMethod;
     }
 
     @RequestMapping("/account")

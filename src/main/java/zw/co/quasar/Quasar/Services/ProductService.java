@@ -15,6 +15,7 @@ import zw.co.quasar.Quasar.POJOS.Product;
 public interface ProductService {
     Product getProduct(int id);
     List<Product> getProducts(int page, int limit, String sortBy, String direction);
+    List<Product> getCategoryProducts(int categoryId, int page, int limit, String sortBy, String direction);
     /*List<Product> searchProduct();
     Boolean addProduct();
     Boolean removeProduct();
