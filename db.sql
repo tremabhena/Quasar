@@ -13,7 +13,8 @@ CREATE TABLE qzw_category(id INT AUTO_INCREMENT PRIMARY KEY,
 						
 CREATE TABLE qzw_currency(id INT AUTO_INCREMENT PRIMARY KEY,
 						iso_code VARCHAR(3) NOT NULL,
-						symbol CHAR, name VARCHAR(30) NOT NULL,
+						symbol CHAR,
+						name VARCHAR(30) NOT NULL,
 						rate FLOAT NOT NULL DEFAULT 1,
 						active BOOLEAN NOT NULL DEFAULT FALSE) ENGINE=InnoDB;
 						

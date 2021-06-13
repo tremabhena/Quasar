@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,8 +104,33 @@ public class ApiController {
         cartService.empty(cart);
     }
 
-    @RequestMapping("/cart/checkout")
-    String checkOut(){
+    @GetMapping("/cart/checkout/address")
+    String getAddressOptions(){
+        return "";
+    }
+    
+    @PostMapping("/cart/checkout/address")
+    String addAddressDetails(){
+        return "";
+    }
+    
+    @GetMapping("/cart/checkout/delivery")
+    String getDeliveryOptions(){
+        return "";
+    }
+    
+    @PostMapping("/cart/checkout/delivery")
+    String addDeliveryDetails(){
+        return "";
+    }
+    
+    @GetMapping("/cart/checkout/payment")
+    String viewPaymentOptions(){
+        return "";
+    }
+    
+    @PostMapping("/cart/checkout/payment")
+    String choosePaymentOptions(){
         return "";
     }
 
