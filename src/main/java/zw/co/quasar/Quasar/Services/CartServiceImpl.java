@@ -47,9 +47,9 @@ public class CartServiceImpl implements CartService{
 
                 cartItem.setId(product.getId());
                 cartItem.setQuantity(1);
-                cartItem.setUnitPrice(product.getPrice());
+                cartItem.setUnitUsdPrice(product.getUsdPrice());
                 cartItem.setName(product.getName());
-                cartItem.setCurrency(product.getCurrency());
+                //cartItem.setCurrency(product.getCurrency());
 
                 items.put(productId, cartItem);
             }

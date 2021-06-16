@@ -9,30 +9,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import zw.co.quasar.Quasar.DbTables;
 import zw.co.quasar.Quasar.POJOS.Category;
 
 /**
  *
  * @author Mabhena
  */
-@Component
+@Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     JdbcTemplate jdbcTemplate;
     
     private final RowMapper<Category> rowMapper = (resultSet, rowNum)->{
                     Category newCategory = new Category();
-                    newCategory.setId(resultSet.getInt("id"));
-                    newCategory.setDescription(resultSet.getString("description"));
-                    newCategory.setName(resultSet.getString("name"));
+                    newCategory.setId(resultSet.getInt(DbTables.Category.COLUMN_ID));
+                    newCategory.setDescription(resultSet.getString(DbTables.Category.COLUMN_DESCRIPTION));
+                    newCategory.setName(resultSet.getString(DbTables.Category.COLUMN_NAME));
                     
                     return newCategory;
                 };
     
     @Override
     public Category getCategory(long categoryId){
-        String query = "SELECT id, name, description FROM qzw_category WHERE id = ?";
+        String query = "SELECT * FROM " + DbTables.Category.TABLE_NAME + " WHERE " + DbTables.Category.COLUMN_ID + " = ?";
         Category category = jdbcTemplate.queryForObject(query,
                 rowMapper
                 , categoryId);
@@ -44,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
         if(!(direction.equalsIgnoreCase("asc") || direction.equalsIgnoreCase("desc"))) direction = "";
         if(!(sortBy.equalsIgnoreCase("price")||sortBy.equalsIgnoreCase("name")||sortBy.equalsIgnoreCase("category"))) sortBy = "id";
         
-        List<Category> categories = jdbcTemplate.query("SELECT id, name, description FROM qzw_category ORDER BY ? ? LIMIT ?,?",
+        List<Category> categories = jdbcTemplate.query("SELECT * FROM " + DbTables.Category.TABLE_NAME + " ORDER BY ? ? LIMIT ?,?",
                 rowMapper
                 ,sortBy, direction, page, limit);
         

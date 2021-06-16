@@ -7,7 +7,7 @@ package zw.co.quasar.Quasar.Services;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import zw.co.quasar.Quasar.POJOS.PaymentMethod;
 import zw.co.quasar.Quasar.POJOS.PaymentOptions;
 
@@ -15,7 +15,7 @@ import zw.co.quasar.Quasar.POJOS.PaymentOptions;
  *
  * @author Mabhena
  */
-@Component
+@Service
 public class PaymentServiceImpl implements PaymentService {
     @Override
     public List<PaymentMethod> getPaymentMethods(){
