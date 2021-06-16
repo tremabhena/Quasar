@@ -8,11 +8,14 @@ package zw.co.quasar.Quasar;
 import zw.co.quasar.Quasar.POJOS.Cart;
 import zw.co.quasar.Quasar.Services.CartService;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import zw.co.quasar.Quasar.POJOS.CartItem;
 import zw.co.quasar.Quasar.POJOS.Category;
 import zw.co.quasar.Quasar.POJOS.DeliveryDetails;
 import zw.co.quasar.Quasar.POJOS.PaymentMethod;
@@ -67,6 +71,14 @@ public class ApiController {
     @RequestMapping("/products/{productId}")
     Product viewProduct(@PathVariable int productId){
         return productService.getProduct(productId);
+    }
+    
+    //search for product by name
+    @RequestMapping("/search")
+    List<Product> searchProducts(@RequestParam("q") String searchTerm, @RequestParam("limit") int limit, @RequestParam("page") int page,
+                        @RequestParam("sort_by") String sortBy, @RequestParam("dir") String direction){
+        List<Product> products = productService.searchProducts(searchTerm, page, limit, sortBy, direction);
+        return products;
     }
     
     //get list of product categories
@@ -149,6 +161,17 @@ public class ApiController {
     @PostMapping("/cart/checkout/payment")
     String choosePaymentOptions(@RequestParam("payment_method") String paymentMethod, HttpSession session){
         return paymentMethod;
+    }
+    
+    @PostMapping("/cart/checkout/finalize")
+    ResponseEntity<String> finalizeCheckout(HttpSession session){
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null ) return ResponseEntity.badRequest().body("There is no cart in the session");
+        HashMap<Integer, CartItem> items = cart.getItems();
+        if(!items.isEmpty()){
+            return ResponseEntity.status(HttpStatus.OK).body("Cart is not empty");
+        }
+        else return ResponseEntity.badRequest().body("Cart is empty!!!");
     }
 
     @RequestMapping("/account")
