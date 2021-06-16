@@ -17,9 +17,10 @@ import lombok.Setter;
 @Getter @Setter
 public class Product {
     private int id, quantity;
-    private BigDecimal price;
+    private BigDecimal usdPrice;//in USD
     private String name, category, description;
-    private Currency currency;
+    //Make USD the default currency
+    /*private Currency currency;*/
     private List<Image> images;
     private boolean active;
 }
